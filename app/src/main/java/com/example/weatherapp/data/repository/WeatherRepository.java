@@ -4,34 +4,47 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.weatherapp.common.Resource;
 import com.example.weatherapp.data.models.MainWeather;
+import com.example.weatherapp.data.remote.WeatherApi;
 import com.example.weatherapp.ui.app.App;
+import com.example.weatherapp.ui.fragments.WeatherFragment;
+
+import javax.inject.Inject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class WeatherRepository {
+    private WeatherApi api;
+    private WeatherFragment weatherFragment=new WeatherFragment();
 
-    public MutableLiveData<Resource<MainWeather>> getWeather(){
-        MutableLiveData<Resource<MainWeather>> liveData= new MutableLiveData<>();
-        liveData.setValue(Resource.loading());
-        App.api.getWeather("Bishkek","34f284ef687268abb84bca32a3522cf7","metric")
+
+
+    @Inject
+    public WeatherRepository(WeatherApi api){
+        this.api=api;
+    }
+
+    public MutableLiveData<Resource<MainWeather>> getWeather(String cityName){
+        MutableLiveData<Resource<MainWeather>> mutableLiveData= new MutableLiveData<>();
+        mutableLiveData.setValue(Resource.loading());
+        api.getWeather(cityName,"32fb914ebb0929b9e2aaa101289d40ea","metric")
                 .enqueue(new Callback<MainWeather>() {
                     @Override
                     public void onResponse(Call<MainWeather> call, Response<MainWeather> response) {
                         if(response.isSuccessful() && response.body()!=null){
-                            liveData.setValue(Resource.success(response.body()));
+                            mutableLiveData.setValue(Resource.success(response.body()));
                         }
                         else{
-                            liveData.setValue(Resource.error(null,response.message()));
+                            mutableLiveData.setValue(Resource.error(null,response.message()));
                         }
                     }
 
                     @Override
                     public void onFailure(Call<MainWeather> call, Throwable t) {
-                        liveData.setValue(Resource.error(null,t.getLocalizedMessage()));
+                        mutableLiveData.setValue(Resource.error(null,t.getLocalizedMessage()));
                     }
                 });
-        return liveData;
+        return mutableLiveData;
     }
 }

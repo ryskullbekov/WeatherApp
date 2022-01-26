@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Users/Admin/AndroidStudioProjects/WeatherApp2/app/src/main/res/drawable/ic_launcher_background.xml" value="0.22962962962962963" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/WeatherApp2/app/src/main/res/layout/activity_main.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/WeatherApp2/app/src/main/res/layout/fragment_base.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/WeatherApp2/app/src/main/res/layout/fragment_weather.xml" value="0.26614583333333336" />
       </map>
     </option>
