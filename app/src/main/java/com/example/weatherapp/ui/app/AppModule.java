@@ -1,8 +1,8 @@
 package com.example.weatherapp.ui.app;
 
+import com.example.weatherapp.data.dao.WeatherDao;
 import com.example.weatherapp.data.remote.WeatherApi;
 import com.example.weatherapp.data.repository.WeatherRepository;
-
 import java.util.concurrent.TimeUnit;
 
 import dagger.Module;
@@ -36,8 +36,8 @@ public abstract class AppModule {
     }
 
     @Provides
-    public static WeatherRepository provideMainRepository(WeatherApi api){
-        return new WeatherRepository(api);
+    public static WeatherRepository provideMainRepository(WeatherApi api, WeatherDao dao){
+        return new WeatherRepository(api, dao);
     }
 
     @Provides

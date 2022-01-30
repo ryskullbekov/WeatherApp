@@ -51,7 +51,7 @@ public class CityFragment extends Fragment {
             public void onClick(View view) {
                 String pol=binding.etCity.getText().toString();
                 setLol(pol);
-                controller.navigate(CityFragmentDirections.actionChangeFragmentToWeatherFragment(pol));
+                controller.navigate(CityFragmentDirections.actionCityFragmentToWeatherFragment(pol));
 
 
             }

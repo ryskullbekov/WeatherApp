@@ -13,9 +13,10 @@ import javax.inject.Inject;
 import dagger.hilt.android.lifecycle.HiltViewModel;
 
 @HiltViewModel
-public class WeatherViewModel  extends ViewModel {
+public class WeatherViewModel extends ViewModel {
     private WeatherRepository repository;
     public LiveData<Resource<MainWeather>> liveData;
+    public LiveData<MainWeather> localLiveData;
 
     @Inject
     public WeatherViewModel(WeatherRepository repository) {
@@ -24,5 +25,9 @@ public class WeatherViewModel  extends ViewModel {
 
     public void getWeather(String cityName){
         liveData=repository.getWeather(cityName);
+    }
+
+    public void getAll() {
+        localLiveData = repository.getAll();
     }
 }
